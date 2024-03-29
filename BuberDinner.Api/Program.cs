@@ -1,4 +1,3 @@
-using BuberDinner.Api.Filters;
 using BuberDinner.Application;
 using BuberDinner.Infrastructure;
 
@@ -23,6 +22,7 @@ var app = builder.Build();
     }
 
     // app.UseMiddleware<ErrorHandlingMiddleware>();
+    app.UseExceptionHandler("/error");
     app.UseHttpsRedirection();
     app.MapControllers();
 
