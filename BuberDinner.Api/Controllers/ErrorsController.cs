@@ -9,6 +9,6 @@ public class ErrorsControllers : ControllerBase
     public IActionResult Error() {
         Exception? exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
         
-        return Problem(title: exception?.Message, statusCode: 400);
+        return Problem();
     }
 }
