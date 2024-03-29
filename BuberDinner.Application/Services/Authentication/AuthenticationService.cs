@@ -42,16 +42,16 @@ public class AuthenticationService : IAuthenticationService
         );
     }
 
-    public AuthenticationResult Login(string email, string password)
+    public ErrorOr<AuthenticationResult> Login(string email, string password)
     {
         if (_userRepository.GetUserByEmail(email) is not User user)
         {
-            throw new Exception("User with this email does not exist.");
+            return Errors.Authentication.InvalidCredentials;
         }
 
         if (user.Password != password)
         {
-            throw new Exception("Invalid password.");
+            return Errors.Authentication.InvalidCredentials;
         }
 
         var token = _jwtTokenGenerator.GenerateToken(user);
